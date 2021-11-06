@@ -1,4 +1,4 @@
-public with sharing class FlowAction {
+public with sharing class FlowAction_noOutput {
 
     // Inputs from the Flow
     public class Input { 
@@ -7,20 +7,9 @@ public with sharing class FlowAction {
         public String someString;
     }
 
-    // Outputs to the Flow
-    public class Output {
-        
-        @invocableVariable (label='Return a Number')
-        public Integer someNumber;
-    }
-
     // Expose the Action to the Flow
     @invocableMethod(label='My Flow Action' description='' category='')
-    public static List<Output> flowAction(List<Input> inputList) {
-
-        // Prepare the output back to the Flow
-        Output output = new Output();
-        List<Output> outputWrapper = new List<Output>();
+    public static void flowAction(List<Input> inputList) {
 
         // Bulkify to process multiple Inputs 
         for (Input i : inputList) {
@@ -32,12 +21,7 @@ public with sharing class FlowAction {
             ///////////// Do Some Stuff Here ///////////////
             ////////////////////////////////////////////////
 
-            // Set output values
-            output.someNumber = 9;
-            outputWrapper.add(output);
-
         }
 
-        return outputWrapper;
     }  
 }
